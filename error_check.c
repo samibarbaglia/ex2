@@ -5,7 +5,7 @@
 #include "error_check.h"
 #include "generator.h"
 
-void is_enough_values(int argc, char *argv[]) {
+int is_enough_values(int argc, char *argv[]) {
      if (argc != 4) {
         if (argc < 4) {
             printf("ERROR: Not enough values. Expected 3, got %d\n", argc - 1);
@@ -13,28 +13,34 @@ void is_enough_values(int argc, char *argv[]) {
         else {
             printf("ERROR: Too many values. Expected 3, got %d\n", argc - 1);
         }
-        return 1;
+        return 0;
     }
 
     if (!is_number(argv[1]) || !is_number(argv[2]) || !is_number(argv[3])) {
         printf("ERROR: All values must be NUMBERS\n");
-        return 1;
+        return 0;
     }
+    return 1;
 }
 
-void is_correct_input(int min, int max, int count, int range) {
+int is_correct_input(int min, int max, int count, int range) {
+    if (min <0 || max < 0) {
+        printf("ERROR: Values must be positive!!\n");
+        return 0;
+    }
     if (min > max) {
         printf("ERROR: Max cannot be less than min!!\n");
-        return;
+        return 0;
     }
     if (count > range) {
         printf("ERROR: Range cannot be less than number of unique values!!\n");
-        return;
+        return 0;
     }
     if (count <= 0) {
-        printf("ERROR: Values must be positive!!\n");
-        return;
+        printf("ERROR: Count must be positive!!\n");
+        return 0;
     }
+    return 1;
 }
 
 int is_number(const char *str) {

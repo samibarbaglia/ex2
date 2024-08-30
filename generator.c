@@ -5,8 +5,7 @@
 #include "generator.h"
 #include "error_check.h"
 
-void generate_random(int min, int max, int count) {
-    int range = (max-min)+1;
+void generate_random(int min, int max, int count, int range) {
     int *values = malloc(range * sizeof(int));
 
     is_correct_input(min, max, count, range);

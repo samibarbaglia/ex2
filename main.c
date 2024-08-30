@@ -7,15 +7,22 @@
 
 int main(int argc, char *argv[]) {
 
-    is_enough_values(argc, *argv);
+    if (!is_enough_values(argc, argv)) {
+        return 1;
+    }
    
     int min = atoi(argv[1]);
     int max = atoi(argv[2]);
     int count = atoi(argv[3]);
 
-    printf("1: %d, 2: %d, 3: %d\n", min, max, count);
+    printf("min: %d, max: %d, count: %d\n", min, max, count);
+    int range = (max-min)+1;
 
-    generate_random(min, max, count);
+    if (!is_correct_input(min, max, count, range)) {
+        return 1;
+    }
+
+    generate_random(min, max, count, range);
 
     return 0;
 }
